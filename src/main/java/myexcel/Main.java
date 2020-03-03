@@ -2,7 +2,6 @@ package myexcel;
 
 import com.github.liaochong.myexcel.core.ExcelBuilder;
 import com.github.liaochong.myexcel.core.FreemarkerExcelBuilder;
-import com.github.liaochong.myexcel.core.ThymeleafExcelBuilder;
 import com.github.liaochong.myexcel.utils.FileExportUtil;
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -12,33 +11,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class App2 {
+public class Main {
     public static void main(String[] args) throws Exception {
-        App2 app2 = new App2();
-        Map<String, Object> dataMap = app2.getDataMap();
+        Main main = new Main();
+        Map<String, Object> dataMap = main.getDataMap();
         try (ExcelBuilder excelBuilder = new FreemarkerExcelBuilder()){
-//            File htmlFile = new File(app2.getClass().getClassLoader().getResource("example.ftl").getFile());
             Workbook workbook = excelBuilder
-                    .template("example2.ftl")
-
-//                    .useDefaultStyle()
+                    .template("example.ftl")
                     .build(dataMap);
-            FileExportUtil.export(workbook, new File("excel2.xlsx"));
+            FileExportUtil.export(workbook, new File("excel.xlsx"));
         }
-
-
-//        try (ExcelBuilder excelBuilder = new ThymeleafExcelBuilder()){
-////            File htmlFile = new File(app2.getClass().getClassLoader().getResource("example.ftl").getFile());
-//            Workbook workbook = excelBuilder
-//                    .template("example2.ftl")
-//                    .useDefaultStyle()
-//                    .build(dataMap);
-//            FileExportUtil.export(workbook, new File("excel2.xlsx"));
-//        }
-
-
-//        Workbook workbook = HtmlToExcelFactory.readHtml(htmlFile).useDefaultStyle().build();
-//        FileExportUtil.export(workbook, new File("excel.xlsx"));
     }
 
     private Map<String, Object> getDataMap() {
